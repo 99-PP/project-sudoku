@@ -4,19 +4,17 @@
 
 subgrid_size(3).
 
-% Define domain of coordinates and values
 num(1..9).
 
 % Each cell (X,Y) must contain only one number N
 1 { sudoku(X,Y,N) : num(N) } 1 :- num(X), num(Y).
 
-% Respect the initial configuration: fix given cells
 sudoku(X,Y,N) :- initial(X,Y,N).
 
-% Each number N appears at most once in each row
+% row
 :- sudoku(X,Y1,N), sudoku(X,Y2,N), Y1 != Y2.
 
-% Each number N appears at most once in each column
+% column
 :- sudoku(X1,Y,N), sudoku(X2,Y,N), X1 != X2.
 
 % Compute which subgrid each cell belongs to
